@@ -3,7 +3,7 @@ import ContactForm from './Form/ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
 
-export default class App extends Component {
+export class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
