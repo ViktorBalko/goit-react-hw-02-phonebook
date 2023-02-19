@@ -17,7 +17,7 @@ const ContactFilter = ({ filter, onChange }) => {
 
 export default ContactFilter;
 
-ContactFilter.propeTypes = {
-  filter: PropTypes.string,
-  onChange: PropTypes.func,
+ContactFilter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

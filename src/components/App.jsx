@@ -14,17 +14,21 @@ export class App extends Component {
     filter: '',
   };
 
-  handleAddContact = newContact =>
+  handleAddContact = newContact => {
+    const { contacts } = this.state;
+    const normalizedContacts = contacts.map(contact =>
+      contact.name.toLowerCase()
+    );
+
+    if (normalizedContacts.includes(newContact.name.toLowerCase())) {
+      alert(`${newContact.name} is already in contacts`);
+      return;
+    }
+
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
     }));
-
-  handleFilterContact = filter => this.setState({ filter });
-
-  handleRemoveContact = id =>
-    this.setState(({ contacts }) => ({
-      contacts: contacts.filter(contact => contact.id !== id),
-    }));
+  };
 
   handleCheckUniqueContact = name => {
     const { contacts } = this.state;
@@ -33,6 +37,13 @@ export class App extends Component {
     isExistContact && alert('contact is already exist');
     return !isExistContact;
   };
+
+  handleFilterContact = filter => this.setState({ filter });
+
+  handleRemoveContact = id =>
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
@@ -51,6 +62,7 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
+          {/* <ContactForm onAdd={this.handleAddContact} /> */}
           <ContactForm
             onAdd={this.handleAddContact}
             onCheckUnique={this.handleCheckUniqueContact}
