@@ -32,14 +32,6 @@ class ContactForm extends Component {
     this.resetForm();
   };
 
-  // handleCheckUniqueContact = name => {
-  //   const { contacts } = this.state;
-  //   const isExistContact = !!contacts.find(contact => contact.name === name);
-
-  //   isExistContact && alert('contact is already exist');
-  //   return !isExistContact;
-  // };
-
   validateForm = () => {
     const { name, number } = this.state;
     const { onCheckUnique } = this.props;
@@ -93,7 +85,6 @@ class ContactForm extends Component {
 
 ContactForm.propTypes = {
   handleSubmitForm: PropTypes.func.isRequired,
-  // handleCheckUniqueContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

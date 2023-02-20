@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import ContactForm from './Form/ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
@@ -14,28 +15,28 @@ export class App extends Component {
     filter: '',
   };
 
-  handleAddContact = newContact => {
+  handleAddContact = (name, number) => {
     const { contacts } = this.state;
-    const normalizedContacts = contacts.map(contact =>
-      contact.name.toLowerCase()
+    const isContactExists = contacts.some(
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() ||
+        contact.number === number
     );
 
-    if (normalizedContacts.includes(newContact.name.toLowerCase())) {
-      alert(`${newContact.name} is already in contacts`);
+    if (isContactExists) {
+      alert('Contact already exists!');
       return;
     }
 
-    this.setState(({ contacts }) => ({
-      contacts: [...contacts, newContact],
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
     }));
-  };
-
-  handleCheckUniqueContact = name => {
-    const { contacts } = this.state;
-    const isExistContact = !!contacts.find(contact => contact.name === name);
-
-    isExistContact && alert('contact is already exist');
-    return !isExistContact;
   };
 
   handleFilterContact = filter => this.setState({ filter });
@@ -62,11 +63,7 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
-          {/* <ContactForm onAdd={this.handleAddContact} /> */}
-          <ContactForm
-            onAdd={this.handleAddContact}
-            onCheckUnique={this.handleCheckUniqueContact}
-          />
+          <ContactForm onAdd={this.handleAddContact} />
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
 
