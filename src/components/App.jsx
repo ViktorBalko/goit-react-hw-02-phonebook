@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import ContactForm from './Form/ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
@@ -15,53 +14,29 @@ export class App extends Component {
     filter: '',
   };
 
-  handleAddContact = ({ name, number }) => {
+  handleAddContact = newContact => {
     const { contacts } = this.state;
-    const isContactExists = contacts.some(
-      contact =>
-        contact.name.toLowerCase() === name.toLowerCase() ||
-        contact.number === number
+    const normalizedContacts = contacts.map(contact =>
+      contact.name.toLowerCase()
     );
 
-    if (isContactExists) {
-      alert('Contact already exists!');
+    if (normalizedContacts.includes(newContact.name.toLowerCase())) {
+      alert(`${newContact.name} is already in contacts`);
       return;
     }
 
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, newContact],
     }));
   };
 
-  // handleAddContact = newContact => {
-  //   const { contacts } = this.state;
-  //   const normalizedContacts = contacts.map(contact =>
-  //     contact.name.toLowerCase()
-  //   );
+  handleCheckUniqueContact = name => {
+    const { contacts } = this.state;
+    const isExistContact = !!contacts.find(contact => contact.name === name);
 
-  //   if (normalizedContacts.includes(newContact.name.toLowerCase())) {
-  //     alert(`${newContact.name} is already in contacts`);
-  //     return;
-  //   }
-
-  //   this.setState(({ contacts }) => ({
-  //     contacts: [...contacts, newContact],
-  //   }));
-  // };
-
-  // handleCheckUniqueContact = name => {
-  //   const { contacts } = this.state;
-  //   const isExistContact = !!contacts.find(contact => contact.name === name);
-
-  //   isExistContact && alert('contact is already exist');
-  //   return !isExistContact;
-  // };
+    isExistContact && alert('contact is already exist');
+    return !isExistContact;
+  };
 
   handleFilterContact = filter => this.setState({ filter });
 
@@ -89,11 +64,11 @@ export class App extends Component {
           <h2 className="FormTitle">сontactAdd</h2>
           <ContactForm
             onAdd={this.handleAddContact}
-            // onCheckUnique={this.handleCheckUniqueContact}
+            onCheckUnique={this.handleCheckUniqueContact}
           />
+
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
-
           <ContactList
             contacts={visibleContacts}
             onRemove={this.handleRemoveContact}
