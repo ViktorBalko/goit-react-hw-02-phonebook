@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import ContactForm from './Form/ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
-// import nanoid from 'nanoid';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -14,31 +12,6 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-  };
-
-  handleAdd = ({ contacts }) => {
-    const name = this.state;
-    const number = this.state;
-    const isContactExists = contacts.some(
-      contact =>
-        contact.name.toLowerCase() === name.toLowerCase() ||
-        contact.number === number
-    );
-
-    if (isContactExists) {
-      alert('Contact is already exist!');
-      return;
-    }
-
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    this.setState(({ contacts }) => ({
-      contacts: [...contacts, newContact],
-    }));
   };
 
   handleFilterContact = filter => this.setState({ filter });
@@ -65,7 +38,6 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
-          <ContactForm onAddContact={this.handleAdd} />
 
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
