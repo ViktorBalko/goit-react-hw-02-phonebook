@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContactForm from './Form/ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
+// import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -14,65 +15,101 @@ export class App extends Component {
     filter: '',
   };
 
-  getAddContact = event => {
-    event.preventDefault();
-
-    const { name, number } = this.state;
+  handleAdd = newContact => {
     const { contacts } = this.state;
-
-    const isDuplicateName = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
+    const normalizedContacts = contacts.map(contact =>
+      contact.name.toLowerCase()
     );
 
-    const isDuplicateNumber = contacts.some(
-      contact => contact.number === number
-    );
-
-    if (isDuplicateName) {
-      alert(`${name} is already in contacts`);
+    if (normalizedContacts.includes(newContact.name.toLowerCase())) {
+      alert(`${newContact.name} is already in contacts`);
       return;
     }
 
-    if (isDuplicateNumber) {
-      alert(`${number} is already in contacts`);
-      return;
-    }
-
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-      name: '',
-      number: '',
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, newContact],
     }));
   };
 
-  // handleAddContact = newContact => {
+  handleCheckUnique = name => {
+    const { contacts } = this.state;
+    const isExistContact = !!contacts.find(contact => contact.name === name);
+
+    isExistContact && alert('contact is already exist');
+    return !isExistContact;
+  };
+
+  // getAddContact = event => {
+  //   event.preventDefault();
+
+  //   const { name, number } = this.state;
   //   const { contacts } = this.state;
-  //   const normalizedContacts = contacts.map(contact =>
-  //     contact.name.toLowerCase()
+
+  //   const isDuplicateName = contacts.some(
+  //     contact => contact.name.toLowerCase() === name.toLowerCase()
   //   );
 
-  //   if (normalizedContacts.includes(newContact.name.toLowerCase())) {
-  //     alert(`${newContact.name} is already in contacts`);
+  //   const isDuplicateNumber = contacts.some(
+  //     contact => contact.number === number
+  //   );
+
+  //   if (isDuplicateName) {
+  //     alert(`${name} is already in contacts`);
   //     return;
   //   }
 
-  //   this.setState(({ contacts }) => ({
-  //     contacts: [...contacts, newContact],
+  //   if (isDuplicateNumber) {
+  //     alert(`${number} is already in contacts`);
+  //     return;
+  //   }
+
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
+
+  //   this.setState(prevState => ({
+  //     contacts: [...prevState.contacts, newContact],
+  //     filter: '',
   //   }));
   // };
 
-  // handleCheckUniqueContact = name => {
-  //   const { contacts } = this.state;
-  //   const isExistContact = !!contacts.find(contact => contact.name === name);
+  // getAddContact = event => {
+  //   event.preventDefault();
 
-  //   isExistContact && alert('contact is already exist');
-  //   return !isExistContact;
+  //   const { name, number } = this.state;
+  //   const { contacts } = this.state;
+
+  //   const isDuplicateName = contacts.some(
+  //     contact => contact.name.toLowerCase() === name.toLowerCase()
+  //   );
+
+  //   const isDuplicateNumber = contacts.some(
+  //     contact => contact.number === number
+  //   );
+
+  //   if (isDuplicateName) {
+  //     alert(`${name} is already in contacts`);
+  //     return;
+  //   }
+
+  //   if (isDuplicateNumber) {
+  //     alert(`${number} is already in contacts`);
+  //     return;
+  //   }
+
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
+
+  //   this.setState(prevState => ({
+  //     contacts: [...prevState.contacts, newContact],
+  //     name: '',
+  //     number: '',
+  //   }));
   // };
 
   handleFilterContact = filter => this.setState({ filter });
@@ -100,7 +137,7 @@ export class App extends Component {
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
 
-          <ContactForm onAddContact={getAddContact} />
+          <ContactForm onAddContact={this.getAddContact} />
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
           <ContactList
@@ -112,3 +149,27 @@ export class App extends Component {
     );
   }
 }
+
+// handleAddContact = newContact => {
+//   const { contacts } = this.state;
+//   const normalizedContacts = contacts.map(contact =>
+//     contact.name.toLowerCase()
+//   );
+
+//   if (normalizedContacts.includes(newContact.name.toLowerCase())) {
+//     alert(`${newContact.name} is already in contacts`);
+//     return;
+//   }
+
+//   this.setState(({ contacts }) => ({
+//     contacts: [...contacts, newContact],
+//   }));
+// };
+
+// handleCheckUniqueContact = name => {
+//   const { contacts } = this.state;
+//   const isExistContact = !!contacts.find(contact => contact.name === name);
+
+//   isExistContact && alert('contact is already exist');
+//   return !isExistContact;
+// };

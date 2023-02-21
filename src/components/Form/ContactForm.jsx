@@ -55,42 +55,6 @@ class ContactForm extends PureComponent {
     return true;
   };
 
-  // validateForm = () => {
-  //   const { name, number } = this.state;
-  //   const { onCheckUnique, contacts } = this.props;
-
-  //   if (!name || !number) {
-  //     alert('some field is empty');
-  //     return false;
-  //   }
-
-  //   const isContactUnique = onCheckUnique(name);
-
-  //   if (!isContactUnique) {
-  //     alert(`${name} is already in contacts`);
-  //     return false;
-  //   }
-
-  //   return true;
-  // };
-
-  // validateForm = () => {
-  //   const { name, number } = this.state;
-  //   const { contacts, onCheckUnique } = this.props;
-
-  //   if (!name || !number) {
-  //     alert('Some field is empty');
-  //     return false;
-  //   }
-
-  //   if (onCheckUnique(name)) {
-  //     alert(`${name} is already in contacts`);
-  //     return false;
-  //   }
-
-  //   return true;
-  // };
-
   resetForm = () => {
     this.setState(INITIAL_STATE);
   };
@@ -137,6 +101,42 @@ ContactForm.propTypes = {
 };
 
 export default ContactForm;
+
+// validateForm = () => {
+//   const { name, number } = this.state;
+//   const { onCheckUnique, contacts } = this.props;
+
+//   if (!name || !number) {
+//     alert('some field is empty');
+//     return false;
+//   }
+
+//   const isContactUnique = onCheckUnique(name);
+
+//   if (!isContactUnique) {
+//     alert(`${name} is already in contacts`);
+//     return false;
+//   }
+
+//   return true;
+// };
+
+// validateForm = () => {
+//   const { name, number } = this.state;
+//   const { contacts, onCheckUnique } = this.props;
+
+//   if (!name || !number) {
+//     alert('Some field is empty');
+//     return false;
+//   }
+
+//   if (onCheckUnique(name)) {
+//     alert(`${name} is already in contacts`);
+//     return false;
+//   }
+
+//   return true;
+// };
 
 // const INITIAL_STATE = {
 //   name: '',
