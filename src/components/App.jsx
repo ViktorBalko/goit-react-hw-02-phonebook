@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -12,6 +13,25 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+  };
+
+  handleAdd = data => {
+    const { name, phone } = data;
+    const isFormValid = this.validateForm(name, phone);
+
+    if (isFormValid) {
+      const isContactExist = this.state.contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
+
+      if (isContactExist) {
+        alert(`${name} is already in contacts`);
+      } else {
+        this.setState(({ contacts }) => ({
+          contacts: [{ id: nanoid(), name, phone }, ...contacts],
+        }));
+      }
+    }
   };
 
   handleFilterContact = filter => this.setState({ filter });
@@ -38,7 +58,9 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
-          <ContactForm />
+          {/* <ContactForm /> */}
+          <ContactForm onSubmit={this.handleAdd} />
+
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
           <ContactList
