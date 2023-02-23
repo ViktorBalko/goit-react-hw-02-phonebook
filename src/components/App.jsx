@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import ContactForm from './ContactForm';
 import ContactList from './Contact/ContactList';
 import ContactFilter from './Filter/ContactFilter';
-// import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -38,7 +38,7 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
-
+          <ContactForm />
           <h2 className="FormTitle">contactsList</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
           <ContactList
