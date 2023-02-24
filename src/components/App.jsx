@@ -15,24 +15,66 @@ export class App extends Component {
     filter: '',
   };
 
-  handleAdd = data => {
-    const { name, phone } = data;
-    const isFormValid = this.validateForm(name, phone);
+  // handleAdd = data => {
+  //   const { name, phone } = data;
+  //   const isFormValid = this.validateForm(name, phone);
 
-    if (isFormValid) {
-      const isContactExist = this.state.contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      );
+  //   if (isFormValid) {
+  //     const isContactExist = this.state.contacts.some(
+  //       contact => contact.name.toLowerCase() === name.toLowerCase()
+  //     );
 
-      if (isContactExist) {
-        alert(`${name} is already in contacts`);
-      } else {
-        this.setState(({ contacts }) => ({
-          contacts: [{ id: nanoid(), name, phone }, ...contacts],
-        }));
-      }
+  //     if (isContactExist) {
+  //       alert(`${name} is already in contacts`);
+  //     } else {
+  //       this.setState(({ contacts }) => ({
+  //         contacts: [{ id: nanoid(), name, phone }, ...contacts],
+  //       }));
+  //     }
+  //   }
+  // };
+
+  handleAdd = ({ name, number }) => {
+    const contact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    const isDuplicate = this.state.contacts.some(
+      cont =>
+        (cont.name.toLowerCase() === name.toLowerCase() &&
+          cont.number === number) ||
+        cont.number === number
+    );
+
+    if (isDuplicate) {
+      alert(`${name} with number ${number} is already in contacts`);
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [contact, ...contacts],
+      }));
     }
   };
+
+  // handleAdd = ({ name, number }) => {
+  //   const contact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
+
+  //   this.state.contacts.some(
+  //     cont =>
+  //       (cont.name.toLowerCase() === contact.name.toLowerCase() &&
+  //         cont.number === contact.number) ||
+  //       cont.number === contact.number
+  //   )
+  //     ? alert(`${name} is already in contacts`)
+  //     : this.setState(({ contacts }) => ({
+  //         contacts: [contact, ...contacts],
+  //       }));
+  // };
 
   handleFilterContact = filter => this.setState({ filter });
 
