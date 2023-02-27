@@ -15,25 +15,6 @@ export class App extends Component {
     filter: '',
   };
 
-  // handleAdd = data => {
-  //   const { name, phone } = data;
-  //   const isFormValid = this.validateForm(name, phone);
-
-  //   if (isFormValid) {
-  //     const isContactExist = this.state.contacts.some(
-  //       contact => contact.name.toLowerCase() === name.toLowerCase()
-  //     );
-
-  //     if (isContactExist) {
-  //       alert(`${name} is already in contacts`);
-  //     } else {
-  //       this.setState(({ contacts }) => ({
-  //         contacts: [{ id: nanoid(), name, phone }, ...contacts],
-  //       }));
-  //     }
-  //   }
-  // };
-
   handleAdd = ({ name, number }) => {
     const contact = {
       id: nanoid(),
@@ -42,10 +23,9 @@ export class App extends Component {
     };
 
     const isDuplicate = this.state.contacts.some(
-      cont =>
-        (cont.name.toLowerCase() === name.toLowerCase() &&
-          cont.number === number) ||
-        cont.number === number
+      inpunting =>
+        inpunting.name.toLowerCase() === name.toLowerCase() ||
+        inpunting.number === number
     );
 
     if (isDuplicate) {
@@ -56,25 +36,6 @@ export class App extends Component {
       }));
     }
   };
-
-  // handleAdd = ({ name, number }) => {
-  //   const contact = {
-  //     id: nanoid(),
-  //     name,
-  //     number,
-  //   };
-
-  //   this.state.contacts.some(
-  //     cont =>
-  //       (cont.name.toLowerCase() === contact.name.toLowerCase() &&
-  //         cont.number === contact.number) ||
-  //       cont.number === contact.number
-  //   )
-  //     ? alert(`${name} is already in contacts`)
-  //     : this.setState(({ contacts }) => ({
-  //         contacts: [contact, ...contacts],
-  //       }));
-  // };
 
   handleFilterContact = filter => this.setState({ filter });
 
@@ -100,14 +61,17 @@ export class App extends Component {
         <h1 className="HomeworkTitle">React HW#2 ~ Phonebook</h1>
         <div className="AppBox">
           <h2 className="FormTitle">сontactAdd</h2>
-          {/* <ContactForm /> */}
+
           <ContactForm onSubmit={this.handleAdd} />
 
           <h2 className="FormTitle">contactsList</h2>
+
           <ContactFilter filter={filter} onChange={this.handleFilterContact} />
+
           <ContactList
             contacts={visibleContacts}
             onRemove={this.handleRemoveContact}
+            onAdd={this.handleAdd}
           />
         </div>
       </>

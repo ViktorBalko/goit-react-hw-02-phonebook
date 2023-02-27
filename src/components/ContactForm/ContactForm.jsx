@@ -7,7 +7,7 @@ import { nanoid } from 'nanoid';
 class ContactForm extends Component {
   state = {
     name: '',
-    phone: '',
+    number: '',
   };
 
   handleChange = ({ target }) => {
@@ -18,46 +18,36 @@ class ContactForm extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
 
-    const { name, phone } = this.state;
-    const { onAdd } = this.prop;
+    const { name, number } = this.state;
+    const { handleAdd } = this.prop;
 
     const isValidatedForm = this.validateForm();
 
     if (!isValidatedForm) return;
 
-    onAdd({ id: nanoid(), name, phone });
+    handleAdd({ id: nanoid(), name, number });
   };
 
   validateForm = () => {
-    const { name, phone } = this.state;
+    const { name, number } = this.state;
     const { onCheckUnique } = this.props;
 
-    if (!name || !phone) {
+    if (!name || !number) {
       alert('some field is empty');
       return false;
     }
-
     return onCheckUnique(name);
-
-    // const isUnique = onCheckUnique(name);
-
-    // if (!isUnique) {
-    //   alert(`${name} is already in contacts`);
-    //   return false;
-    // }
-
-    // return true;
   };
 
   resetForm = () => {
     this.setState({
       name: '',
-      phone: '',
+      number: '',
     });
   };
 
   render() {
-    const { name, phone } = this.state;
+    const { name, number } = this.state;
 
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.ContactForm}>
@@ -74,10 +64,10 @@ class ContactForm extends Component {
         />
         <input
           type="tel"
-          name="phone"
+          name="number"
           className={styles.ContactFormInput}
           placeholder="Phone"
-          value={phone}
+          value={number}
           onChange={this.handleChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -92,7 +82,7 @@ class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  onAddContact: PropTypes.func.isRequired,
+  handleAdd: PropTypes.func.isRequired,
   onCheckUnique: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
