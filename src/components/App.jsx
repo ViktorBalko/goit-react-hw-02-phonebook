@@ -62,9 +62,7 @@ export class App extends Component {
       <>
         <h1 className="HomeworkTitle">React HW2 ~ Phonebook</h1>
         <div className="AppBox">
-          <h2 className="FormTitle">Phonebook</h2>
           <ContactForm onSubmit={this.handleAddContact} />
-          <h2 className="FormTitle">Contacts</h2>
           <ContactFilter filter={filter} onChange={this.handleFilterChange} />
           <ContactList
             contacts={filteredContacts}

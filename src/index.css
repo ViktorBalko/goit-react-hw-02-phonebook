@@ -43,9 +43,8 @@ ul {
   font-size: 16px;
   font-weight: 300;
   font-style: italic;
-  margin-top: 24px;
-  margin-bottom: -10px;
-  margin-left: -380px;
+  margin-top: 2vh;
+  margin-right: 77vw;
   color: #ffffff85;
   font-size: 20px;
   font-weight: 200;
@@ -54,18 +53,5 @@ ul {
 .AppBox {
   display: flex;
   flex-direction: column;
-  width: 600px;
-  border-radius: 2em;
   align-items: center;
-  padding: 20px 0;
-  /* background-color: #fff; */
-}
-
-.FormTitle {
-  margin-right: 500px;
-  color: #00050a8b;
-  font-size: 15px;
-  line-height: 2px;
-  font-style: italic;
-  font-weight: 300;
 }
