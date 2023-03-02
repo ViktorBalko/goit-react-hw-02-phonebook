@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
+
 function DeleteButton({ onDeleteContact, contactId }) {
   return (
     <button
