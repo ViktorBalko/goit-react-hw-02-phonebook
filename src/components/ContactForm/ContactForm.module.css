@@ -19,8 +19,8 @@
   margin: 15px 0;
   padding: 20px 20px;
   outline: none;
-  font-weight: 100;
-  font-size: 19px;
+  font-weight: 400;
+  font-size: 20px;
   font-style: italic;
   color: #f3f6fa60;
   transition: 0.5s;
@@ -36,7 +36,8 @@
 }
 
 .ContactFormInput::placeholder {
-  color: #dcdcdc7a;
+  color: #dcdcdcc1;
+  font-weight: 400;
   font-size: 13px;
   font-style: italic;
 }
@@ -49,8 +50,8 @@
   border: none;
   color: #ffffff90;
   border-radius: 8px;
-  font-size: 10px;
-  font-weight: 100;
+  font-size: 13px;
+  font-weight: 400;
   transition: 200ms;
   align-items: center;
   background: #ffffff0f;
