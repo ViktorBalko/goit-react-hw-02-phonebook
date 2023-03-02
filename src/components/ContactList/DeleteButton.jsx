@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
-
+import styles from './ContactList.module.css';
 function DeleteButton({ onDeleteContact, contactId }) {
   return (
-    <button type="button" onClick={() => onDeleteContact(contactId)}>
-      del
+    <button
+      type="button"
+      className={styles.DeleteButton}
+      onClick={() => onDeleteContact(contactId)}
+    >
+      delete Contact
     </button>
   );
 }

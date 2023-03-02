@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import DeleteButton from './DeleteButton';
+import styles from './ContactList.module.css';
 
 function ContactItem({ contact, onDeleteContact }) {
   const { name, number } = contact;
 
   return (
-    <li>
+    <li className={styles.ContactItem}>
       <p>
         {name}: {number}
       </p>

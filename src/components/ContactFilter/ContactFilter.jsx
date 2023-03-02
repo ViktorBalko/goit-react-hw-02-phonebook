@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './ContactFilter.module.css';
 
 const ContactFilter = ({ value, onChange }) => {
   return (
@@ -7,6 +8,7 @@ const ContactFilter = ({ value, onChange }) => {
       <input
         type="text"
         value={value}
+        className={styles.ContactFilterInput}
         placeholder={'..to Find'}
         onChange={onChange}
       />

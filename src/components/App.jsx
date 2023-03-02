@@ -16,18 +16,12 @@ export class App extends Component {
   };
 
   handleAddContact = ({ name, number }) => {
-    const { contacts } = this.state;
     const contact = {
       id: nanoid(),
       name,
       number,
     };
-
-    // if (name === '' || number === '') {
-    //   alert('Please enter all fields!');
-    //   return;
-    // }
-
+    const { contacts } = this.state;
     if (
       contacts.find(
         contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -65,16 +59,19 @@ export class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.handleAddContact} />
-        <h2>Contacts</h2>
-        <ContactFilter filter={filter} onChange={this.handleFilterChange} />
-        <ContactList
-          contacts={filteredContacts}
-          onDeleteContact={this.handleDeleteContact}
-        />
-      </div>
+      <>
+        <h1 className="HomeworkTitle">React HW2 ~ Phonebook</h1>
+        <div className="AppBox">
+          <h2 className="FormTitle">Phonebook</h2>
+          <ContactForm onSubmit={this.handleAddContact} />
+          <h2 className="FormTitle">Contacts</h2>
+          <ContactFilter filter={filter} onChange={this.handleFilterChange} />
+          <ContactList
+            contacts={filteredContacts}
+            onDeleteContact={this.handleDeleteContact}
+          />
+        </div>
+      </>
     );
   }
 }

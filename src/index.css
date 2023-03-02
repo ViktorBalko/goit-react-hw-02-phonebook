@@ -31,7 +31,6 @@ h5,
 h6,
 p {
   margin: 0;
-  color: rgba(240, 248, 255, 0.368);
 }
 
 ol,
@@ -59,11 +58,12 @@ ul {
   border-radius: 2em;
   align-items: center;
   padding: 20px 0;
+  /* background-color: #fff; */
 }
 
 .FormTitle {
   margin-right: 500px;
-  color: #edf6fd6d;
+  color: #00050a8b;
   font-size: 15px;
   line-height: 2px;
   font-style: italic;
